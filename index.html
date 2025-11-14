@@ -189,80 +189,99 @@ footer{
 const questions = [
   {text:"I __________ (think) about moving abroad for years before I finally decided.",
    options:["had thought","was thinking","had been thinking","thought"],
-   answer:"had been thinking","was thinking",
+   answer:["had been thinking","was thinking"],
    explain:"Past perfect continuous = long ongoing consideration before a past decision (dynamic use)."},
+
   {text:"I __________ (see) the doctor at 4 p.m. tomorrow.",
    options:["see","am seeing","will see","will be seeing"],
-   answer:"am seeing","will be seeing",
+   answer:["am seeing","will be seeing"],
    explain:"Present continuous for a fixed future plan ('see' = meet)."},
-  {text:"You __________ (be) selfish! What's wrong with you today, you're not ususally like this!.",
+
+  {text:"You __________ (be) selfish! What's wrong with you today, you're not usually like this!",
    options:["are","are being","were","had been"],
    answer:"are being",
    explain:"'Be' in the continuous = temporary behaviour."},
+
   {text:"She __________ (have) two cats when she was younger.",
    options:["was having","had","has had","had been having"],
    answer:"had",
    explain:"'Have' meaning 'own' is stative → simple past."},
+
   {text:"They __________ (have) dinner when I called last night.",
    options:["had","were having","have had","had been having"],
-   answer:"were having","had been having",
+   answer:["were having","had been having"],
    explain:"'Have' meaning 'eat' is dynamic → past continuous."},
+
   {text:"By the time we arrived, the band __________ (play) for over an hour.",
    options:["played","was playing","had played","had been playing"],
    answer:"had been playing",
    explain:"Past perfect continuous emphasizes duration before another past event."},
+
   {text:"I __________ (think) this is a terrible idea.",
    options:["am thinking","was thinking","think","have been thinking"],
    answer:"think",
    explain:"'Think' = 'believe', a stative sense → simple present."},
+
   {text:"This cake __________ (taste) a bit strange. Did you add salt instead of sugar?",
    options:["tastes","is tasting","was tasting","has been tasting"],
    answer:"tastes",
    explain:"'Taste' as a description of flavour is stative → simple present."},
+
   {text:"She __________ (taste) the soup to see if it needs more salt.",
    options:["tastes","is tasting","was tasting","will taste"],
    answer:"is tasting",
    explain:"'Taste' meaning 'try/test' is dynamic → present continuous."},
+
   {text:"Next year at this time, I __________ (work) in our new office in Singapore.",
    options:["will work","am working","will be working","am going to work"],
    answer:"will be working",
    explain:"Future continuous = action in progress at a specific future moment."},
+
   {text:"He __________ (appear) confident, but he’s actually very nervous.",
    options:["appears","is appearing","has appeared","was appearing"],
    answer:"appears",
    explain:"'Appear' meaning 'seem' → stative."},
+
   {text:"He __________ (appear) in a new Netflix series next month.",
    options:["appears","is appearing","has appeared","will be appearing"],
-   answer:"is appearing","will be appearing",
+   answer:["is appearing","will be appearing"],
    explain:"'Appear' meaning 'perform' → present continuous for planned future."},
+
   {text:"She __________ (always/complain) about her colleagues – she never says anything positive.",
    options:["always complain","is always complaining","was always being complaining","always complained"],
    answer:"is always complaining",
    explain:"Present continuous with 'always' = repeated annoying behaviour."},
+
   {text:"You __________ (look) worried. What happened?",
    options:["look","are looking","have looked","were looking"],
    answer:"look",
    explain:"'Look' meaning 'seem' → stative."},
+
   {text:"He __________ (look) for a new job since the company downsized.",
    options:["looks","is looking","has been looking","had been looking"],
    answer:"has been looking",
    explain:"Present perfect continuous = ongoing dynamic action."},
+
   {text:"By 2030, many people __________ (work) remotely for over a decade.",
    options:["will work","will have worked","will have been working","will be working"],
    answer:"will have been working",
    explain:"Future perfect continuous shows duration up to a future time."},
+
   {text:"I __________ (see) John this morning – he looked really tired.",
    options:["see","am seeing","saw","have seen"],
    answer:"saw",
    explain:"Simple past = finished time reference."},
+
   {text:"We __________ (see) a lot more of each other lately – we’ve both been free.",
    options:["saw","have been seeing","are seeing","will be seeing"],
-   answer:"have been seeing","are seeing",
+   answer:["have been seeing","are seeing"],
    explain:"Present perfect continuous = repeated dynamic action recently."},
+
   {text:"She __________ (know) him since they were children.",
    options:["knew","was knowing","has known","had known"],
    answer:"has known",
    explain:"'Know' = stative verb → present perfect simple for duration."},
+
   {text:"He __________ (understand) the issue after we explained it twice.",
    options:["understood","was understanding","had understood","has understood"],
    answer:"had understood",
@@ -297,9 +316,11 @@ function showQuestion(){
   feedbackEl.textContent="";
   explanationEl.textContent="";
   optionsEl.innerHTML="";
+  
   if(current<order.length){
     const q = questions[order[current]];
     sentenceEl.textContent = `${current+1}. ${q.text}`;
+    
     q.options.forEach(opt=>{
       const btn=document.createElement("button");
       btn.classList.add("option");
@@ -307,23 +328,32 @@ function showQuestion(){
       btn.addEventListener("click",()=>checkAnswer(opt,q));
       optionsEl.appendChild(btn);
     });
+    
     scoreEl.textContent=`Score: ${score} / ${questions.length}`;
-  }else{
+  } else {
     sentenceEl.textContent="🎉 Excellent work! You’ve finished all questions.";
     feedbackEl.textContent=`Final Score: ${score} / ${questions.length}`;
     restartBtn.style.display="inline-block";
   }
 }
 
-function checkAnswer(choice,q){
-  if(choice===q.answer){
+function checkAnswer(choice, q){
+  const correct = Array.isArray(q.answer)
+    ? q.answer.includes(choice)
+    : choice === q.answer;
+
+  if(correct){
     feedbackEl.textContent="✅ Correct!";
     feedbackEl.style.color="green";
     score++;
   }else{
-    feedbackEl.textContent=`❌ Incorrect. The correct answer is "${q.answer}".`;
+    const correctText = Array.isArray(q.answer)
+      ? q.answer.join(" or ")
+      : q.answer;
+    feedbackEl.textContent=`❌ Incorrect. The correct answer is "${correctText}".`;
     feedbackEl.style.color=varAccent();
   }
+
   explanationEl.textContent=q.explain;
   current++;
   setTimeout(showQuestion,2200);
@@ -333,8 +363,10 @@ function varAccent(){return getComputedStyle(document.documentElement).getProper
 restartBtn.addEventListener("click",init);
 init();
 </script>
+
 </body>
 </html>
+
 
 
 
