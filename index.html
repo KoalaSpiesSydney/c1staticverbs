@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>B1 Practice – State vs Dynamic Verbs | Modern English Australia</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C1 Grammar Game – Choose the Correct Tense | Modern English Australia</title>
 <style>
-:root {
+:root{
   --bg:#f5f5f5;
   --card:#2a2a2a;
   --ink:#1e1e1e;
   --muted:#bbbbbb;
   --accent:#ff7a1a;
-  --line:#3a3a3a;
   --radius:14px;
   --shadow:0 6px 24px rgba(0,0,0,.25);
 }
-*{box-sizing:border-box;}
+
 body{
   margin:0;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
@@ -25,15 +23,15 @@ body{
   display:flex;
   flex-direction:column;
   min-height:100vh;
-  line-height:1.6;
 }
+
+/* ===== Header ===== */
 header{
   background:var(--card);
   color:var(--accent);
   text-align:center;
   padding:1rem;
   font-size:1.5rem;
-  letter-spacing:1px;
   box-shadow:var(--shadow);
   position:relative;
 }
@@ -48,105 +46,77 @@ header{
   font-size:.9rem;
   font-weight:bold;
 }
-section.intro{
-  max-width:900px;
-  margin:1.5rem auto;
+
+/* ===== Intro / Explanation ===== */
+.explanation{
+  text-align:center;
+  max-width:800px;
+  margin:1rem auto;
   background:white;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:1.5rem;
+  padding:1rem 1.5rem;
+  font-size:1.05rem;
 }
-section.intro h2{
-  text-align:center;
-  color:var(--accent);
-}
-section.intro table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:1rem;
-}
-section.intro th, section.intro td{
-  border:1px solid #ddd;
-  padding:.6rem;
-  text-align:left;
-}
-section.intro th{
-  background:var(--accent);
-  color:white;
-}
+
+/* ===== Main Card ===== */
 main{
   flex:1;
   display:flex;
-  flex-wrap:wrap;
+  flex-direction:column;
+  align-items:center;
   justify-content:center;
-  align-items:flex-start;
-  padding:1rem;
-  gap:1.5rem;
+  padding:1.5rem;
 }
-.column{
-  flex:1 1 300px;
+
+.card{
   background:white;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:1rem;
-  min-height:400px;
-  position:relative;
+  padding:2rem 1.5rem;
+  max-width:800px;
+  width:95%;
 }
-.column h2{
-  text-align:center;
-  color:var(--accent);
-  margin-top:0;
+
+#sentence{
+  font-size:1.2rem;
+  margin-bottom:1.5rem;
 }
-.dropzone{
-  border:2px dashed var(--accent);
-  border-radius:var(--radius);
-  padding:.8rem;
-  text-align:center;
-  color:var(--muted);
-  min-height:200px;
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
 }
-.verb{
+button.option{
   background:var(--card);
   color:white;
-  padding:.6rem 1rem;
-  margin:.4rem;
+  border:none;
+  padding:.7rem 1rem;
   border-radius:var(--radius);
-  cursor:grab;
-  text-align:center;
-  user-select:none;
-  transition:transform .2s, background .3s;
+  cursor:pointer;
+  text-align:left;
+  transition:background .3s, transform .2s;
 }
-.verb:active{transform:scale(1.05);}
-.verb.selected{background:var(--accent);}
-#verbs{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:10px;
-  padding:10px;
-}
-.feedback{
-  text-align:center;
-  font-size:1.2rem;
-  margin-top:1rem;
-  min-height:2rem;
-}
-button{
-  display:block;
-  margin:1.2rem auto;
+button.option:hover{background:var(--accent);transform:scale(1.02);}
+
+#feedback{margin-top:1rem;font-weight:bold;min-height:2rem;}
+#explanation{margin-top:.5rem;font-size:.95rem;color:#333;}
+#score{margin-top:1rem;color:var(--accent);font-weight:bold;}
+
+#restart{
+  display:none;
+  margin-top:1.5rem;
   background:var(--accent);
   color:white;
-  font-weight:bold;
   border:none;
   padding:.8rem 1.6rem;
   border-radius:var(--radius);
   cursor:pointer;
   box-shadow:var(--shadow);
-  transition:background .3s;
 }
-button:hover{background:#ff8f3d;}
 
-/* === Unified Navigation Buttons (consistent with C1 page) === */
+/* ===== Navigation Buttons ===== */
 .nav-buttons {
   text-align:center;
   margin:2rem 0;
@@ -155,6 +125,7 @@ button:hover{background:#ff8f3d;}
   gap:1rem;
   justify-content:center;
 }
+
 .nav-buttons a {
   background:var(--card);
   color:white;
@@ -165,6 +136,7 @@ button:hover{background:#ff8f3d;}
   box-shadow:var(--shadow);
   transition:background .3s, transform .2s;
 }
+
 .nav-buttons a:hover,
 .nav-buttons a:focus-visible {
   background:var(--accent);
@@ -172,149 +144,197 @@ button:hover{background:#ff8f3d;}
   outline:none;
 }
 
+/* ===== Footer ===== */
 footer{
-  text-align:center;
-  padding:1rem;
   background:var(--card);
   color:var(--muted);
+  text-align:center;
+  padding:1rem;
   font-size:.9rem;
-}
-@media(max-width:700px){
-  main{flex-direction:column;align-items:stretch;}
-  section.intro table{font-size:.9rem;}
 }
 </style>
 </head>
-
 <body>
 <header>
-  🎯 State vs Dynamic Verbs – Matching Game
-  <div class="level-badge">B1 Level</div>
+  🎓 C1 Grammar Challenge – Static or Dynamic?
+  <div class="level-badge">C1 Level</div>
 </header>
 
-<section class="intro">
-  <h2>Understanding State Verbs</h2>
-  <p><strong>State verbs</strong> describe <b>feelings, thoughts, possession, senses, and existence</b>, not actions.<br>
-  They usually <b>don’t use continuous forms</b> (❌ am knowing, ✅ know).</p>
-
-  <p><b>Examples:</b><br>
-  → I believe you.<br>
-  → She has a car.<br>
-  → This cake tastes amazing.<br>
-  → I love learning English.</p>
-
-  <h3>Part 2 – Common State Verbs</h3>
-  <table>
-    <tr><th>Type</th><th>Verbs</th><th>Example Sentence</th></tr>
-    <tr><td>💭 Thinking / Knowing</td><td>know, believe, understand, think (believe), remember, forget</td><td>I know the answer.</td></tr>
-    <tr><td>💰 Possession</td><td>have, own, belong, include</td><td>This pen belongs to me.</td></tr>
-    <tr><td>❤️ Feelings / Emotions</td><td>like, love, hate, prefer, need, want, wish</td><td>She wants a new phone.</td></tr>
-    <tr><td>👀 Senses</td><td>see, hear, smell, taste, feel</td><td>It smells wonderful.</td></tr>
-    <tr><td>🌈 Appearance / Existence</td><td>be, seem, appear, look (seem), consist</td><td>He seems tired.</td></tr>
-  </table>
-</section>
+<p class="explanation">
+  <strong>Context is everything.</strong><br>
+  A verb that’s usually <em>static</em> can behave like a <em>dynamic</em> verb when the meaning changes.<br>
+  Decide which tense best fits the situation — look carefully at meaning, time, and aspect.
+</p>
 
 <main>
-  <section class="column">
-    <h2>🧠 State (Static) Verbs</h2>
-    <div class="dropzone" id="staticZone">Drop or tap here</div>
-  </section>
-  <section class="column">
-    <h2>⚡ Dynamic (Action) Verbs</h2>
-    <div class="dropzone" id="dynamicZone">Drop or tap here</div>
-  </section>
+  <div class="card">
+    <div id="sentence">Loading question...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback"></div>
+    <div id="explanation"></div>
+    <div id="score"></div>
+    <button id="restart">🔁 Play Again</button>
+  </div>
+
+  <div class="nav-buttons">
+    <a href="https://ieltspteaustralianexaminertutor.com/">🏠 Home</a>
+    <a href="stateverbs.html">📘 Further Practice</a>
+    <a href="C1staticverbs.pdf" download>⬇️ Download Worksheet (PDF/Word)</a>
+  </div>
 </main>
-
-<h3 style="text-align:center;">Drag or tap each verb into the correct category 👇</h3>
-<div id="verbs">
-  <div class="verb" draggable="true" data-type="static">know</div>
-  <div class="verb" draggable="true" data-type="dynamic">run</div>
-  <div class="verb" draggable="true" data-type="static">love</div>
-  <div class="verb" draggable="true" data-type="dynamic">jump</div>
-  <div class="verb" draggable="true" data-type="static">believe</div>
-  <div class="verb" draggable="true" data-type="dynamic">write</div>
-  <div class="verb" draggable="true" data-type="static">own</div>
-  <div class="verb" draggable="true" data-type="dynamic">cook</div>
-  <div class="verb" draggable="true" data-type="static">need</div>
-  <div class="verb" draggable="true" data-type="dynamic">swim</div>
-  <div class="verb" draggable="true" data-type="static">belong</div>
-  <div class="verb" draggable="true" data-type="dynamic">talk</div>
-</div>
-
-<div class="feedback" id="feedback"></div>
-<button id="checkBtn">✅ Check Answers</button>
-<button id="resetBtn">🔁 Reset Game</button>
-
-<div class="nav-buttons">
-  <a href="https://ieltspteaustralianexaminertutor.com/">🏠 Home</a>
-  <a href="staticvdynamic.html">📘 Further Practice</a>
-  <a href="b1stateverbs.pdf" download>⬇️ Download Worksheet (PDF/Word)</a>
-</div>
 
 <footer>© Koala Spies Sydney · Modern English Australia.</footer>
 
 <script>
-// ----- Drag and Drop + Tap Logic -----
-const verbs=document.querySelectorAll('.verb');
-const staticZone=document.getElementById('staticZone');
-const dynamicZone=document.getElementById('dynamicZone');
-const feedback=document.getElementById('feedback');
-const checkBtn=document.getElementById('checkBtn');
-const resetBtn=document.getElementById('resetBtn');
-let selected=null;
+const questions = [
+  {text:"I __________ (think) about moving abroad for years before I finally decided.",
+   options:["had thought","was thinking","had been thinking","thought"],
+   answer:"had been thinking","was thinking",
+   explain:"Past perfect continuous = long ongoing consideration before a past decision (dynamic use)."},
+  {text:"I __________ (see) the doctor at 4 p.m. tomorrow.",
+   options:["see","am seeing","will see","will be seeing"],
+   answer:"am seeing","will be seeing",
+   explain:"Present continuous for a fixed future plan ('see' = meet)."},
+  {text:"You __________ (be) selfish! What's wrong with you today, you're not ususally like this!.",
+   options:["are","are being","were","had been"],
+   answer:"are being",
+   explain:"'Be' in the continuous = temporary behaviour."},
+  {text:"She __________ (have) two cats when she was younger.",
+   options:["was having","had","has had","had been having"],
+   answer:"had",
+   explain:"'Have' meaning 'own' is stative → simple past."},
+  {text:"They __________ (have) dinner when I called last night.",
+   options:["had","were having","have had","had been having"],
+   answer:"were having","had been having",
+   explain:"'Have' meaning 'eat' is dynamic → past continuous."},
+  {text:"By the time we arrived, the band __________ (play) for over an hour.",
+   options:["played","was playing","had played","had been playing"],
+   answer:"had been playing",
+   explain:"Past perfect continuous emphasizes duration before another past event."},
+  {text:"I __________ (think) this is a terrible idea.",
+   options:["am thinking","was thinking","think","have been thinking"],
+   answer:"think",
+   explain:"'Think' = 'believe', a stative sense → simple present."},
+  {text:"This cake __________ (taste) a bit strange. Did you add salt instead of sugar?",
+   options:["tastes","is tasting","was tasting","has been tasting"],
+   answer:"tastes",
+   explain:"'Taste' as a description of flavour is stative → simple present."},
+  {text:"She __________ (taste) the soup to see if it needs more salt.",
+   options:["tastes","is tasting","was tasting","will taste"],
+   answer:"is tasting",
+   explain:"'Taste' meaning 'try/test' is dynamic → present continuous."},
+  {text:"Next year at this time, I __________ (work) in our new office in Singapore.",
+   options:["will work","am working","will be working","am going to work"],
+   answer:"will be working",
+   explain:"Future continuous = action in progress at a specific future moment."},
+  {text:"He __________ (appear) confident, but he’s actually very nervous.",
+   options:["appears","is appearing","has appeared","was appearing"],
+   answer:"appears",
+   explain:"'Appear' meaning 'seem' → stative."},
+  {text:"He __________ (appear) in a new Netflix series next month.",
+   options:["appears","is appearing","has appeared","will be appearing"],
+   answer:"is appearing","will be appearing",
+   explain:"'Appear' meaning 'perform' → present continuous for planned future."},
+  {text:"She __________ (always/complain) about her colleagues – she never says anything positive.",
+   options:["always complain","is always complaining","was always being complaining","always complained"],
+   answer:"is always complaining",
+   explain:"Present continuous with 'always' = repeated annoying behaviour."},
+  {text:"You __________ (look) worried. What happened?",
+   options:["look","are looking","have looked","were looking"],
+   answer:"look",
+   explain:"'Look' meaning 'seem' → stative."},
+  {text:"He __________ (look) for a new job since the company downsized.",
+   options:["looks","is looking","has been looking","had been looking"],
+   answer:"has been looking",
+   explain:"Present perfect continuous = ongoing dynamic action."},
+  {text:"By 2030, many people __________ (work) remotely for over a decade.",
+   options:["will work","will have worked","will have been working","will be working"],
+   answer:"will have been working",
+   explain:"Future perfect continuous shows duration up to a future time."},
+  {text:"I __________ (see) John this morning – he looked really tired.",
+   options:["see","am seeing","saw","have seen"],
+   answer:"saw",
+   explain:"Simple past = finished time reference."},
+  {text:"We __________ (see) a lot more of each other lately – we’ve both been free.",
+   options:["saw","have been seeing","are seeing","will be seeing"],
+   answer:"have been seeing","are seeing",
+   explain:"Present perfect continuous = repeated dynamic action recently."},
+  {text:"She __________ (know) him since they were children.",
+   options:["knew","was knowing","has known","had known"],
+   answer:"has known",
+   explain:"'Know' = stative verb → present perfect simple for duration."},
+  {text:"He __________ (understand) the issue after we explained it twice.",
+   options:["understood","was understanding","had understood","has understood"],
+   answer:"had understood",
+   explain:"Past perfect = completed understanding before another past event."}
+];
 
-// drag desktop
-verbs.forEach(v=>{
-  v.addEventListener('dragstart',e=>{
-    e.dataTransfer.setData('text/plain',e.target.dataset.type+'|'+e.target.textContent);
-  });
-});
+let order = [], current=0, score=0;
 
-// drop zones
-[staticZone,dynamicZone].forEach(zone=>{
-  zone.addEventListener('dragover',e=>e.preventDefault());
-  zone.addEventListener('drop',e=>{
-    e.preventDefault();
-    const [type,text]=e.dataTransfer.getData('text/plain').split('|');
-    const el=[...verbs].find(v=>v.textContent===text);
-    zone.appendChild(el);
-  });
-});
+const sentenceEl=document.getElementById("sentence");
+const optionsEl=document.getElementById("options");
+const feedbackEl=document.getElementById("feedback");
+const explanationEl=document.getElementById("explanation");
+const scoreEl=document.getElementById("score");
+const restartBtn=document.getElementById("restart");
 
-// tap mobile
-verbs.forEach(v=>{
-  v.addEventListener('click',()=>{
-    if(selected===v){v.classList.remove('selected');selected=null;return;}
-    if(selected)selected.classList.remove('selected');
-    selected=v;v.classList.add('selected');
-  });
-});
-[staticZone,dynamicZone].forEach(zone=>{
-  zone.addEventListener('click',()=>{
-    if(selected){zone.appendChild(selected);selected.classList.remove('selected');selected=null;}
-  });
-});
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
 
-// check
-checkBtn.addEventListener('click',()=>{
-  let score=0,total=verbs.length;
-  document.querySelectorAll('.dropzone').forEach(zone=>{
-    [...zone.children].forEach(v=>{
-      const correct=(zone.id==='staticZone'&&v.dataset.type==='static')||
-                    (zone.id==='dynamicZone'&&v.dataset.type==='dynamic');
-      if(correct)score++;
+function init(){
+  order = shuffle([...Array(questions.length).keys()]);
+  current=0; score=0;
+  restartBtn.style.display="none";
+  showQuestion();
+}
+
+function showQuestion(){
+  feedbackEl.textContent="";
+  explanationEl.textContent="";
+  optionsEl.innerHTML="";
+  if(current<order.length){
+    const q = questions[order[current]];
+    sentenceEl.textContent = `${current+1}. ${q.text}`;
+    q.options.forEach(opt=>{
+      const btn=document.createElement("button");
+      btn.classList.add("option");
+      btn.textContent=opt;
+      btn.addEventListener("click",()=>checkAnswer(opt,q));
+      optionsEl.appendChild(btn);
     });
-  });
-  feedback.textContent=`You got ${score} out of ${total} correct!`;
-  feedback.style.color=score===total?'green':'#ff7a1a';
-});
+    scoreEl.textContent=`Score: ${score} / ${questions.length}`;
+  }else{
+    sentenceEl.textContent="🎉 Excellent work! You’ve finished all questions.";
+    feedbackEl.textContent=`Final Score: ${score} / ${questions.length}`;
+    restartBtn.style.display="inline-block";
+  }
+}
 
-// reset
-resetBtn.addEventListener('click',()=>{
-  feedback.textContent='';
-  document.getElementById('verbs').append(...verbs);
-});
+function checkAnswer(choice,q){
+  if(choice===q.answer){
+    feedbackEl.textContent="✅ Correct!";
+    feedbackEl.style.color="green";
+    score++;
+  }else{
+    feedbackEl.textContent=`❌ Incorrect. The correct answer is "${q.answer}".`;
+    feedbackEl.style.color=varAccent();
+  }
+  explanationEl.textContent=q.explain;
+  current++;
+  setTimeout(showQuestion,2200);
+}
+
+function varAccent(){return getComputedStyle(document.documentElement).getPropertyValue('--accent');}
+restartBtn.addEventListener("click",init);
+init();
 </script>
 </body>
 </html>
+
+
 
